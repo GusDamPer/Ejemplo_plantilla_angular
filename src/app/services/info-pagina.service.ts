@@ -10,9 +10,12 @@ export class InfoPaginaService {
   info: InfoPagina = {}; //InfoPagina es el nombre de la interface
   cargada = false;
 
+  equipo: any[] = [];
+
   constructor( private http: HttpClient ) {
 
     this.cargarInfo();
+    this.cargarEquipo();
 
   }
 
@@ -27,4 +30,13 @@ export class InfoPaginaService {
       });
   }
 
+  private cargarEquipo(){
+    this.http.get('https://angular-fh-5b2ac-default-rtdb.firebaseio.com/equipo.json')
+      .subscribe( (resp: any) => {
+
+        this.equipo = resp;
+        //console.log(resp);
+
+      });
+  }
 }
